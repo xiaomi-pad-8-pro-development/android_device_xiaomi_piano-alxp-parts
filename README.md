@@ -1,7 +1,7 @@
 # ALXPParts (ALXP Features)
 
 Personal extras for the Pad, as its own app with its own **ALXP Features**
-entry in Evolution X settings, next to Xiaomi features. Each feature is one
+entry in Settings, next to Xiaomi features. Each feature is one
 switch on that page:
 
 - **AirPods automatic switching** with iPhone and Mac.
@@ -28,10 +28,14 @@ EQ and head tracking are not included.
 
 ## Build
 
-Built from source with the ROM by Soong (`Android.bp`), like PianoParts.
-It is installed only when the product sets `WITH_ALXP_PARTS := true`;
-`sync-device.sh --alxpparts` does that and applies the Bluetooth patch in
-`patches/packages_modules_Bluetooth`.
+Built from source with the ROM by Soong (`Android.bp`). Sync it to
+`device/xiaomi/piano-alxp-parts`; the
+[piano-parts](https://github.com/xiaomi-pad-8-pro-development/android_device_xiaomi_piano-parts)
+product makefile includes `product.mk` when it is present. Set
+`WITH_ALXP_PARTS := false` to leave it out.
+
+AirPods switching needs the Bluetooth patch in
+`patches/packages_modules_Bluetooth`, applied to `packages/modules/Bluetooth`.
 
 ## Use
 

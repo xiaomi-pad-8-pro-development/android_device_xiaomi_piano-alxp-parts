@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
-# sync-device.sh --alxpparts writes selected.mk; WITH_ALXP_PARTS=true also works.
--include device/xiaomi/piano-parts/alxpparts/selected.mk
-ifeq ($(WITH_ALXP_PARTS),true)
+# Installed whenever this repository is synced; WITH_ALXP_PARTS := false skips it.
+ifneq ($(WITH_ALXP_PARTS),false)
 PRODUCT_PACKAGES += ALXPParts
 PRODUCT_COPY_FILES += \
-    device/xiaomi/piano-parts/alxpparts/privapp-permissions-alxpparts.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-alxpparts.xml
+    device/xiaomi/piano-alxp-parts/privapp-permissions-alxpparts.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-alxpparts.xml \
+    device/xiaomi/piano-alxp-parts/default-permissions-alxpparts.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/default-permissions/default-permissions-alxpparts.xml
 endif
