@@ -1,4 +1,4 @@
-# ALXPParts (ALXP Features)
+# ALXP Features for the Xiaomi Pad 8 Pro (piano)
 
 Personal extras for the Pad, as its own app with its own **ALXP Features**
 entry in Settings, next to Xiaomi features. Each feature is one
