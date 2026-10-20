@@ -34,8 +34,9 @@ Built from source with the ROM by Soong (`Android.bp`). Sync it to
 product makefile includes `product.mk` when it is present. Set
 `WITH_ALXP_PARTS := false` to leave it out.
 
-AirPods switching needs the Bluetooth patch in
-`patches/packages_modules_Bluetooth`, applied to `packages/modules/Bluetooth`.
+AirPods switching needs the Bluetooth change in
+`patches/packages_modules_Bluetooth`; `vendorsetup.sh` applies it to
+`packages/modules/Bluetooth` when `build/envsetup.sh` is sourced.
 
 ## Use
 
