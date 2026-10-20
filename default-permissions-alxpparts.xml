@@ -3,6 +3,7 @@
 <!-- Runtime permissions ALXP Features needs as soon as a switch is turned on. -->
 <exceptions>
     <exception package="org.alxp.parts">
+        <permission name="android.permission.ACCESS_LOCAL_NETWORK" fixed="false" />
         <permission name="android.permission.BLUETOOTH_ADVERTISE" fixed="false" />
         <permission name="android.permission.BLUETOOTH_CONNECT" fixed="false" />
         <permission name="android.permission.BLUETOOTH_SCAN" fixed="false" />
