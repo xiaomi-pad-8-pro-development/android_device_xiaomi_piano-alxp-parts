@@ -30,7 +30,7 @@ EQ and head tracking are not included.
 
 Built from source with the ROM by Soong (`Android.bp`). Sync it to
 `device/xiaomi/piano-alxp-parts`; the
-[piano-parts](https://github.com/xiaomi-pad-8-pro-development/android_device_xiaomi_piano-parts)
+[piano-xiaomi-parts](https://github.com/xiaomi-pad-8-pro-development/android_device_xiaomi_piano-xiaomi-parts)
 product makefile includes `product.mk` when it is present. Set
 `WITH_ALXP_PARTS := false` to leave it out.
 
