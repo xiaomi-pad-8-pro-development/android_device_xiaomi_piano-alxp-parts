@@ -30,12 +30,12 @@ EQ and head tracking are not included.
 
 Built from source with the ROM by Soong (`Android.bp`). Sync it to
 `device/xiaomi/piano-alxp-parts`; the
-[piano-xiaomi-parts](https://github.com/xiaomi-pad-8-pro-development/android_device_xiaomi_piano-xiaomi-parts)
-product makefile includes `product.mk` when it is present. Set
-`WITH_ALXP_PARTS := false` to leave it out.
+[device tree](https://github.com/xiaomi-pad-8-pro-development/android_device_xiaomi_piano)
+includes `alxpparts.mk` when it is present. Leave it unsynced to build
+without it.
 
 AirPods switching needs the Bluetooth change in
-`patches/packages_modules_Bluetooth`; `vendorsetup.sh` applies it to
+`rom-patches/packages_modules_Bluetooth`; `vendorsetup.sh` applies it to
 `packages/modules/Bluetooth` when `build/envsetup.sh` is sourced.
 
 ## Use
