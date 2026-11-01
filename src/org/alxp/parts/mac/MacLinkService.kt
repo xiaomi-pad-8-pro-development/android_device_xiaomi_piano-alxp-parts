@@ -21,6 +21,7 @@ import android.util.Base64
 import android.util.Log
 import org.alxp.parts.Feature
 import org.alxp.parts.R
+import org.alxp.parts.Status
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.net.ServerSocket
@@ -91,6 +92,7 @@ class MacLinkService : Service() {
         registration?.let { getSystemService(NsdManager::class.java).unregisterService(it) }
         try { server?.close() } catch (_: Exception) {}
         link?.close()
+        Status.clear(this, MacLinkService::class.java)
         super.onDestroy()
     }
 
@@ -247,10 +249,13 @@ class MacLinkService : Service() {
         clipboard.setPrimaryClip(ClipData.newUri(contentResolver, "Mac", uri))
     }
 
-    private fun status(text: String): Notification = Notification.Builder(this, CHANNEL)
-        .setSmallIcon(R.drawable.ic_feature_mac)
-        .setContentTitle(getString(R.string.mac_title))
-        .setContentText(text)
-        .setOngoing(true)
-        .build()
+    private fun status(text: String): Notification {
+        Status.set(this, MacLinkService::class.java, text, text != getString(R.string.mac_waiting))
+        return Notification.Builder(this, CHANNEL)
+            .setSmallIcon(R.drawable.ic_feature_mac)
+            .setContentTitle(getString(R.string.mac_title))
+            .setContentText(text)
+            .setOngoing(true)
+            .build()
+    }
 }

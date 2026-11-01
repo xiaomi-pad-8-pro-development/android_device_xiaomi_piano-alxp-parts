@@ -26,6 +26,7 @@ import android.os.Looper
 import android.os.ParcelUuid
 import android.util.Log
 import org.alxp.parts.R
+import org.alxp.parts.Status
 import java.io.ByteArrayOutputStream
 import java.util.UUID
 
@@ -118,6 +119,7 @@ class AncsService : Service() {
         gatt?.close()
         server?.close()
         notifications.cancelAll()
+        Status.clear(this, AncsService::class.java)
         super.onDestroy()
     }
 
@@ -372,12 +374,15 @@ class AncsService : Service() {
         notifications.cancel(uid)
     }
 
-    private fun status(text: String): Notification = Notification.Builder(this, SERVICE_CHANNEL)
-        .setSmallIcon(R.drawable.ic_feature_iphone)
-        .setContentTitle(getString(R.string.iphone_title))
-        .setContentText(text)
-        .setOngoing(true)
-        .build()
+    private fun status(text: String): Notification {
+        Status.set(this, AncsService::class.java, text, text != getString(R.string.ancs_waiting))
+        return Notification.Builder(this, SERVICE_CHANNEL)
+            .setSmallIcon(R.drawable.ic_feature_iphone)
+            .setContentTitle(getString(R.string.iphone_title))
+            .setContentText(text)
+            .setOngoing(true)
+            .build()
+    }
 
     private fun le32(data: ByteArray, at: Int) = (data[at].toInt() and 0xFF) or
         ((data[at + 1].toInt() and 0xFF) shl 8) or ((data[at + 2].toInt() and 0xFF) shl 16) or

@@ -21,6 +21,42 @@
     <string name="mac_display_title">Mac second display</string>
     <string name="mac_display_summary">Use the Pad as an extra Mac display, like Sidecar. Start it from ALXP for Mac; touch and the pen move the pointer.</string>
 
+    <string name="iphone_description">Shows your iPhone notifications on the Pad, the way a smartwatch gets them. You can answer or dismiss them from here too.</string>
+
+    <string name="feature_use">Use %1$s</string>
+    <string name="status_title">Status</string>
+    <string name="status_off">Off</string>
+    <string name="status_starting">On, starting</string>
+    <string name="status_waiting">On · %1$s</string>
+    <string name="status_connected">Working · %1$s</string>
+    <string name="checks_title">What it needs</string>
+    <string name="check_ok">Ready</string>
+    <string name="check_needed">Not ready, tap to fix</string>
+    <string name="check_bluetooth">Bluetooth is on</string>
+    <string name="check_permissions">Permissions allowed</string>
+    <string name="check_network">Wi-Fi connected (or USB debugging on)</string>
+    <string name="check_airpods_paired">AirPods paired with the Pad</string>
+    <string name="check_rom_patch">ROM supports AirPods switching</string>
+    <string name="steps_title">How to set it up</string>
+    <string name="step_number">Step %1$d</string>
+
+    <string name="airpods_step_1">Pair your AirPods with the Pad once: open the case near the Pad, hold the button on the back until the light flashes white, then pick them in Bluetooth settings.</string>
+    <string name="airpods_step_2">Turn on the switch above. Bluetooth restarts once so the AirPods see the Pad as an Apple device.</string>
+    <string name="airpods_step_3">Play music or take a call on the Pad: the AirPods move to the Pad.</string>
+    <string name="airpods_step_4">Play on your iPhone or Mac: the AirPods move back. The status above shows which AirPods the Pad is following.</string>
+
+    <string name="iphone_step_1">Turn on the switch above and allow the permissions it asks for.</string>
+    <string name="iphone_step_2">On the iPhone, open Settings &gt; Bluetooth and tap %1$s under Other Devices.</string>
+    <string name="iphone_step_3">Accept the pairing code on both, then tap Allow when the iPhone asks to share notifications.</string>
+    <string name="iphone_step_4">The status above changes to Working. New iPhone notifications now appear on the Pad.</string>
+
+    <string name="mac_step_install">On the Mac, build and open ALXP for Mac: run mac/make-app.sh from the ALXP Parts source, then open mac/build/ALXP.app. Turn on Open at Login in its menu.</string>
+    <string name="mac_step_open">Keep the Pad and the Mac on the same Wi-Fi, or connect them with USB with USB debugging on.</string>
+    <string name="mac_step_pair">The first time, the ALXP menu on the Mac shows a pairing code and the Pad asks to pair. Check that the code matches and tap Pair.</string>
+    <string name="mac_clipboard_step">Copy text or an image on one device and paste it on the other. The status above shows Working while the Mac is linked.</string>
+    <string name="mac_display_step_permissions">On the Mac, allow ALXP in System Settings &gt; Privacy &amp; Security for Screen Recording and Accessibility.</string>
+    <string name="mac_display_step">In the ALXP menu on the Mac, choose Use Pad as Display. The Pad shows the extra screen; touch and the pen move the pointer.</string>
+
     <string name="footer">AirPods switching is based on LibrePods.</string>
 
     <string name="notification_channel">AirPods switching</string>

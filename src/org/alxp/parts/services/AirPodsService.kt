@@ -47,6 +47,7 @@ import android.view.KeyEvent
 import androidx.preference.PreferenceManager
 import org.alxp.parts.NativeIntegration
 import org.alxp.parts.R
+import org.alxp.parts.Status
 import org.alxp.parts.bluetooth.Aacp
 
 class AirPodsService : Service(), Aacp.Listener {
@@ -103,6 +104,7 @@ class AirPodsService : Service(), Aacp.Listener {
         unregisterReceiver(bluetoothReceiver)
         audio.unregisterAudioPlaybackCallback(playbackCallback)
         getSystemService(TelephonyManager::class.java).unregisterTelephonyCallback(callListener)
+        Status.clear(this, AirPodsService::class.java)
         try { aacp.socket?.close() } catch (_: Exception) {}
         super.onDestroy()
     }
@@ -318,6 +320,7 @@ class AirPodsService : Service(), Aacp.Listener {
         } else {
             getString(R.string.notification_waiting)
         }
+        Status.set(this, AirPodsService::class.java, text, connected != null)
         return Notification.Builder(this, CHANNEL)
             .setSmallIcon(R.drawable.ic_alxp_features)
             .setContentTitle(getString(R.string.app_name))
