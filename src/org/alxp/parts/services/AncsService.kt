@@ -43,6 +43,8 @@ class AncsService : Service() {
         private const val SERVICE_CHANNEL = "iphone_link"
         private const val CHANNEL = "iphone"
         private const val ACTION = "org.alxp.parts.ANCS_ACTION"
+        /** iPhone notifications use their ANCS UID as id, so keep them apart from id 2. */
+        private const val IPHONE_TAG = "iphone"
 
         private val ANCS = UUID.fromString("7905F431-B5CE-4E99-A40F-4B1E122D00D0")
         private val NOTIFICATION_SOURCE = UUID.fromString("9FBF120D-6301-42D9-8C58-25E699A21DBD")
@@ -288,7 +290,7 @@ class AncsService : Service() {
             }
             EVENT_REMOVED -> {
                 flagsByUid.remove(uid)
-                notifications.cancel(uid)
+                notifications.cancel(IPHONE_TAG, uid)
             }
         }
     }
@@ -357,7 +359,7 @@ class AncsService : Service() {
         if (flags and FLAG_NEGATIVE != 0) {
             builder.addAction(action(uid, false, attrs[ATTR_NEGATIVE_LABEL].orEmpty().ifEmpty { "Clear" }))
         }
-        notifications.notify(uid, builder.build())
+        notifications.notify(IPHONE_TAG, uid, builder.build())
     }
 
     private fun action(uid: Int, positive: Boolean, label: String): Notification.Action {
@@ -371,7 +373,7 @@ class AncsService : Service() {
     private fun performAction(uid: Int, positive: Boolean) {
         writeControlPoint(byteArrayOf(CMD_PERFORM_ACTION.toByte()) + le32(uid) +
             byteArrayOf(if (positive) 0 else 1))
-        notifications.cancel(uid)
+        notifications.cancel(IPHONE_TAG, uid)
     }
 
     private fun status(text: String): Notification {
