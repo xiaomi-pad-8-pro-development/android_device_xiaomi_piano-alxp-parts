@@ -5,6 +5,7 @@ import android.Manifest.permission.BLUETOOTH_ADVERTISE
 import android.Manifest.permission.BLUETOOTH_CONNECT
 import android.Manifest.permission.BLUETOOTH_SCAN
 import android.Manifest.permission.POST_NOTIFICATIONS
+import android.Manifest.permission.READ_PHONE_STATE
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
@@ -64,7 +65,9 @@ class FeatureGuide(
         fun of(feature: Feature) = when (feature) {
             Feature.AIRPODS_SWITCHING -> FeatureGuide(R.string.airpods_title,
                 R.string.airpods_summary,
-                listOf(romPatch, bluetoothOn, permissions(POST_NOTIFICATIONS), airPodsPaired),
+                listOf(romPatch, bluetoothOn,
+                    permissions(POST_NOTIFICATIONS, BLUETOOTH_CONNECT, READ_PHONE_STATE),
+                    airPodsPaired),
                 listOf(R.string.airpods_step_1, R.string.airpods_step_2,
                     R.string.airpods_step_3, R.string.airpods_step_4))
             Feature.IPHONE_NOTIFICATIONS -> FeatureGuide(R.string.iphone_title,

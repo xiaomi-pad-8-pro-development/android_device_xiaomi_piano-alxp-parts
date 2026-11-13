@@ -72,6 +72,7 @@ class AirPodsService : Service(), Aacp.Listener {
     private var localMac = ""
     private var musicActive = false
     private var recentlyLostOwnership = false
+    private var callListenerRegistered = false
 
     private val clearLostOwnership = Runnable { recentlyLostOwnership = false }
 
@@ -93,8 +94,16 @@ class AirPodsService : Service(), Aacp.Listener {
             addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
         }, RECEIVER_NOT_EXPORTED)
         audio.registerAudioPlaybackCallback(playbackCallback, handler)
-        getSystemService(TelephonyManager::class.java)
-            .registerTelephonyCallback(mainExecutor, callListener)
+        // Call state needs READ_PHONE_STATE; without it switching still
+        // follows music, so do not take the whole service down.
+        callListenerRegistered = try {
+            getSystemService(TelephonyManager::class.java)
+                .registerTelephonyCallback(mainExecutor, callListener)
+            true
+        } catch (e: SecurityException) {
+            Log.w(TAG, "No phone state permission; calls will not switch", e)
+            false
+        }
 
         findConnectedAirPods()
     }
@@ -103,7 +112,9 @@ class AirPodsService : Service(), Aacp.Listener {
         handler.removeCallbacksAndMessages(null)
         unregisterReceiver(bluetoothReceiver)
         audio.unregisterAudioPlaybackCallback(playbackCallback)
-        getSystemService(TelephonyManager::class.java).unregisterTelephonyCallback(callListener)
+        if (callListenerRegistered) {
+            getSystemService(TelephonyManager::class.java).unregisterTelephonyCallback(callListener)
+        }
         Status.clear(this, AirPodsService::class.java)
         try { aacp.socket?.close() } catch (_: Exception) {}
         super.onDestroy()
